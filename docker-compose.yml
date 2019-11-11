@@ -4,7 +4,7 @@ services:
     build: ./php
     volumes:
     - ./html:/var/www/html:delegated
-    - /etc/localtime:/etc/localtime
+    - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
   apache:
@@ -21,7 +21,9 @@ services:
     ports:
       - '3306'
     volumes:
-      - ./db:/var/lib/mysql:delegated
+    - ./db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: symfony
+      MYSQL_USER: symfonyuser
+      MYSQL_PASSWORD: symfonypass
